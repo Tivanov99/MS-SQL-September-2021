@@ -1,0 +1,8 @@
+CREATE TABLE Persons(
+PersonId int,
+PersonName varchar(130),
+PersonAge int,
+Country varchar(30),
+City varchar(50),
+Street varchar(255)
+);
