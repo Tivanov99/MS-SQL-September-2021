@@ -1,0 +1,5 @@
+ALTER TABLE [Persons]
+ADD Hobbies varchar(255) ,
+PhoneNumber int (20),
+PersonHeight int (5),
+PersonWeight float(5)
