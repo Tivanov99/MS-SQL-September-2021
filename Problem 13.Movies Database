@@ -1,0 +1,78 @@
+CREATE TABLE [Directors](
+[Id] INT IDENTITY NOT NULL,
+[DirectorName] VARCHAR(60),
+[Notes] VARCHAR(MAX)
+)
+
+--
+ALTER TABLE [Directors]
+ADD CONSTRAINT [PK-DirectorsID] PRIMARY KEY ([Id])
+--
+INSERT INTO [Directors] ([DirectorName],[Notes]) VALUES
+('Angel','Working hard'),
+('Peter','Working hard too'),
+('George','Working hard too too'),
+('Milen','Working hard too'),
+('John','Working hard too')
+
+
+
+CREATE TABLE [Genres](
+[Id] INT IDENTITY NOT NULL,
+[GenreName] VARCHAR(15),
+[Notes] VARCHAR (MAX)
+)
+--
+ALTER TABLE [Genres]
+ADD CONSTRAINT [PK_GenersID] PRIMARY KEY ([Id])
+--
+INSERT INTO [Genres] ([GenreName],[Notes]) VALUES
+('Action','The genre is Action'),
+('Drama','The genre is Drama'),
+('Fantazy','The genre is fantazy'),
+('Trailer','The genre is trailer'),
+('Horrors','The genre is horrors')
+
+
+
+CREATE TABLE [Categories](
+[Id] INT IDENTITY NOT NULL,
+[CategoryName] VARCHAR(40) NOT NULL,
+[Notes] VARCHAR (MAX)
+)
+--
+ALTER TABLE [Categories]
+ADD CONSTRAINT [PK_CategoriesId] PRIMARY KEY ([Id])
+--
+
+INSERT INTO [Categories] ([CategoryName],[Notes])VALUES
+('Action','Category is Action'),
+('Drama','Category is Drama'),
+('Fantazy','Category is fantazy'),
+('Trailer','Category is trailer'),
+('Horrors','Category is horrors')
+
+
+
+CREATE TABLE [Movies](
+[Id] INT IDENTITY NOT NULL,
+[Title] VARCHAR (30),
+[DirectorId] INT,
+[CopyrightYear] DATETIME2,
+[Length] FLOAT ,
+[GenreId] VARCHAR(15) NOT NULL,
+[CategoryId] INT NOT NULL,
+[Rating] FLOAT,
+[Notes] VARCHAR(MAX)
+)
+
+--
+ALTER TABLE [Movies]
+ADD CONSTRAINT [PK_MoviesId] PRIMARY KEY ([Id])
+--
+INSERT INTO [Movies] ([Title],[DirectorId],[CopyrightYear],[Length],[GenreId],[CategoryId],[Rating],[Notes])VALUES
+('Lucifer',1,'2019',204,'Fantazy',2,6.00,'Is a great Movie'),
+('Fast and Furious',2,'2010',190.6,'Action',1,5.98,'Is a great Movie'),
+('Iron Man',1,'2008',160,'Fantazy',3,5.01,'Is a great Movie'),
+('Mad Max',3,'1999',154.6,'Drama',4,4.83,'Is a great Movie'),
+('The Wolf of Wall Street',4,'2013',120.1,'Drama',4,4.61,'Is a great Movie')
