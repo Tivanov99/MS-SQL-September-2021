@@ -1,0 +1,23 @@
+CREATE TABLE [People]
+(
+[Id] INT IDENTITY ,
+[Name] VARCHAR (200) NOT NULL,
+[Picture] VARBINARY(MAX),
+CHECK(DATALENGTH ([PICTURE])<=2000000),
+[Height] FLOAT,
+[Weight] FLOAT,
+[Gender] CHAR (1) NOT NULL,
+[Birthdate] DATETIME2 NOT NULL,
+[Biography] VARCHAR(MAX)
+CONSTRAINT PK_PEOPLESID PRIMARY KEY ([Id])
+)
+
+INSERT INTO [People] ([Name],[Picture],[Height],[Weight],[Gender],[Birthdate],[Biography])VALUES
+('Milen',20000,1.80,71.5,'m','1999-04-26','My name is Milen and i live in Bulgaria'),
+('IVan',150,1.67,81.5,'m','2000-08-1','My name is IVan and i live in Bulgaria'),
+('George',2000000,1.81,75,'m','2000-12-31','My name is George and i live in Bulgaria'),
+('Peter',1000000,1.91,60,'m','2003-04-3','My name is Peter and i live in Bulgaria'),
+('Stoyan',1050000,2.01,95,'m','1996-12-31','My name is Stoyan and i live in Bulgaria')
+
+
+													 				   
