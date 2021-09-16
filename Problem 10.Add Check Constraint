@@ -1,0 +1,27 @@
+CREATE TABLE [Users](
+[Id] BIGINT IDENTITY,
+[Username] CHAR(30) UNIQUE NOT NULL,
+[Password] CHAR(26) NOT NULL,
+[ProfilePicture]  VARBINARY (MAX),
+CHECK (DATALENGTH([ProfilePicture])<=900000),
+[LastLoginTime] DATETIME2,
+[IsDeleted] BIT,
+CONSTRAINT PK_USERSID PRIMARY KEY ([Id]) 
+)
+
+INSERT INTO [Users] ([Username],[Password],[ProfilePicture],[LastLoginTime],[IsDeleted])VALUES
+('Milen','Milen123',600000,'1999-04-26',1),
+('George','George123',710000,'2000-08-1',0),
+('Angel','Angel123',710000,'2021-05-15',0),
+('Michel','Michel123',10000,'2021-11-3',1),
+('Sam','Sam123',670000,'2021-9-14',0)
+
+ALTER TABLE [Users]
+DROP CONSTRAINT [PK_USERSID]
+
+ALTER TABLE [Users]
+ADD CONSTRAINT PK_IDUSERNAME PRIMARY KEY ([Id],[Username])
+
+ALTER TABLE [Users]
+ADD CONSTRAINT PASSWORDVALIDATION CHECK(DATALENGTH ([Password])>=5)
+
