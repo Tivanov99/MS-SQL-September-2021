@@ -1,0 +1,91 @@
+CREATE TABLE [Categories](
+[Id] INT IDENTITY PRIMARY KEY NOT NULL,
+[CategoryName] CHAR(15) NOT NULL,
+[DailyRate] FLOAT NOT NULL,
+[WeeklyRate] FLOAT NOT NULL,
+[MonthlyRate] FLOAT NOT NULL,
+[WeekendRate] FLOAT NOT NULL
+)
+
+INSERT INTO [Categories] ([CategoryName],[DailyRate],[WeeklyRate],[MonthlyRate],[WeekendRate])VALUES
+('Sport',5.5,7.6,8,6),
+('Family',4.5,5.3,4,8),
+('Jeep',4.7,5.6,4,4)
+
+--
+--
+
+CREATE TABLE [Cars](
+[Id] INT IDENTITY PRIMARY KEY NOT NULL,
+[PlateNumber] CHAR(10) NOT NULL,
+[Manufacturer] CHAR(10) NOT NULL,
+[Model] CHAR (15) NOT NULL,
+[CarYear] INT NOT NULL,
+[Doors] INT NOT NULL,
+[Picture] VARBINARY(MAX),
+CHECK (DATALENGTH([Picture])<=200000),
+[Condition] CHAR (30) NOT NULL,
+[Available] BIT NOT NULL,
+)
+
+INSERT INTO [Cars] ([PlateNumber],[Manufacturer],[Model],[CarYear],[Doors],[Picture],[Condition],[Available])VALUES
+('A9904HC','AUDI','S8',2019,5,Null,'completely healthy',1),
+('A0310RR','BMW','M5',2015,5,80000,'completely healthy',0),
+('B6867TH','Mercedes','S63',2021,5,200000,'completely healthy',1)
+
+--
+--
+CREATE TABLE [Employees](
+[Id] INT IDENTITY PRIMARY KEY NOT NULL,
+[FirstName] VARCHAR(60) NOT NULL,
+[LastName] VARCHAR(60) NOT NULL,
+[Title] CHAR (20),
+[Notes] CHAR(1000)
+)
+
+INSERT INTO [Employees] ([FirstName],[LastName],[Title],[Notes]) VALUES
+('Milen','Angelov','Test Driver',Null),
+('Josh','Peterson','The Mechanik','I love my work, because i do what i want to do'),
+('Anthony','Winchester','Seller',Null)
+
+--
+--
+CREATE TABLE [Customers](
+[Id] INT IDENTITY PRIMARY KEY NOT NULL,
+[DriverLicenceNumber] VARCHAR(40) NOT NULL,
+[FullName] VARCHAR(60) NOT NULL,
+[Address] NVARCHAR (50) NOT NULL,
+[City] CHAR (16) NOT NULL,
+[ZIPCode] INT NOT NULL,
+[Notes] NVARCHAR(100)
+)
+
+INSERT INTO [Customers] ([DriverLicenceNumber],[FullName],[Address],[City],[ZIPCode],[Notes])VALUES
+('a141366at5wGHe36J','Milen Angelov', 'Wall Street 11A','California',8000,Null),
+('GJJI183kgj31n82','Josh Peterson', 'Tsar Kaloyan 22A','Varna',9000,Null),
+('IJAMDADAO386103JJANDAP7','Anthony Winchester', 'Wood Green','London',11003,Null)
+
+
+CREATE TABLE [RentalOrders](
+[Id] INT IDENTITY PRIMARY KEY NOT NULL,
+[EmployeeId] INT NOT NULL,
+[CustomerId] INT NOT NULL,
+[CarId] INT NOT NULL,
+[TankLevel] FLOAT NOT NULL,
+[KilometrageStart] FLOAT NOT NULL,
+[KilometrageEnd] FLOAT NOT NULL,
+[TotalKilometrage] FLOAT NOT NULL,
+[StartDate] DATETIME2 NOT NULL,
+[EndDate] DATETIME2 NOT NULL,
+[TotalDays] INT NOT NULL,
+[RateApplied] FLOAT NOT NULL,
+[TaxRate] FLOAT NOT NULL,
+[OrderStatus] FLOAT NOT NULL,
+[Notes] NVARCHAR(300)
+)
+
+INSERT INTO [RentalOrders] ([EmployeeId],[CustomerId],[CarId],[TankLevel],[KilometrageStart],[KilometrageEnd],
+[TotalKilometrage],[StartDate],[EndDate],[TotalDays],[RateApplied],[TaxRate],[OrderStatus],[Notes]) VALUES
+(1,1,3,33.03,175000.100,177000,3000,'2021-5-12','2021-5-22',10,7.8,9,10.00,Null),
+(2,3,1,56.13,265000.38,269000,4000,'2021-1-1','2021-2-1',30,6.1,7,8.00,Null),
+(3,3,2,87.90,278560,280660,2100,'2021-8-12','2021-8-15',3,6.6,6,8.00,Null)
