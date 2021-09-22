@@ -1,0 +1,32 @@
+CREATE TABLE [Subjects](
+[SubjectID] INT PRIMARY KEY NOT NULL,
+[SubjectName] VARCHAR(30)
+)
+
+CREATE TABLE [Majors](
+[MajorID] INT PRIMARY KEY NOT NULL,
+[Name] VARCHAR(30)
+)
+
+CREATE TABLE [Students](
+[StudentID] INT PRIMARY KEY NOT NULL,
+[StudentNumber] INT NOT NULL,
+[StudentName] VARCHAR(30),
+[MajorID] INT FOREIGN KEY REFERENCES [Majors]([MajorID])
+)
+
+
+CREATE TABLE [Payments](
+[PaymentID] INT PRIMARY KEY NOT NULL,
+[PaymentDate] DATETIME2  NOT NULL,
+[PaymentAmount] DECIMAL,
+[StudentID] INT FOREIGN KEY REFERENCES [Students]([StudentID])
+)
+
+CREATE TABLE [Agenda](
+[StudentID] INT NOT NULL,
+[SubjectID] INT NOT NULL,
+CONSTRAINT PK_Agenda PRIMARY KEY ([StudentID],[SubjectID]),
+CONSTRAINT FK_StudentsID FOREIGN KEY([StudentID]) REFERENCES [Students]([StudentID]),
+CONSTRAINT FK_SubjectsID FOREIGN KEY ([SubjectID]) REFERENCES [Subjects]([SubjectID])
+)
