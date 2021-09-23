@@ -1,0 +1,5 @@
+SELECT p.PeakName, r.RiverName,LOWER (CONCAT (SUBSTRING(p.PeakName,1,LEN(p.PeakName)),SUBSTRING(r.RiverName,2,LEN(r.RiverName))))AS [MIX]
+FROM [Rivers] AS r
+JOIN [Peaks] AS p
+ON SUBSTRING(r.RiverName,1,1) = SUBSTRING(p.PeakName,LEN(p.PeakName),1)
+ORDER BY [MIX]
