@@ -1,0 +1,3 @@
+SELECT * FROM [Towns]
+WHERE [Name] LIKE '[^B]%' AND [Name] LIKE '[^R]%' AND [Name] LIKE'[^D]%'
+ORDER BY [Name]
