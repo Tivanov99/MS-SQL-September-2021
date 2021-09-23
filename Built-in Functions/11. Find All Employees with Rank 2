@@ -1,0 +1,8 @@
+SELECT * FROM (
+	SELECT [EmployeeID],[FirstName],[LastName],[Salary] ,
+	DENSE_RANK () over (PARTITION BY [Salary]  order by [EmployeeID] ) as [Rank] 
+	from [Employees] 
+	WHERE [Salary] BETWEEN 10000 AND 50000  
+	) a
+	WHERE A.Rank=2
+	ORDER BY A.[Salary] DESC 
