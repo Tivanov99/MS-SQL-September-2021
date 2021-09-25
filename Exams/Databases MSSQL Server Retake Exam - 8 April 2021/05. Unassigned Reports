@@ -1,0 +1,3 @@
+SELECT [Description], FORMAT([OpenDate],'dd-MM-yy') FROM [Reports]
+WHERE [EmployeeId] IS NULL OR [EmployeeId]= ''
+ORDER BY [OpenDate], [Description]
