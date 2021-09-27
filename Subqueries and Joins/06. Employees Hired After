@@ -1,5 +1,5 @@
 SELECT E.[FirstName],E.[LastName],E.[HireDate], DEP.[Name]
 FROM [Employees] AS E 
 JOIN [Departments] AS DEP ON E.[DepartmentID] = DEP.[DepartmentID]
-WHERE DEP.Name IN ('Sales','Finance')
-ORDER BY E.[HireDate]
+WHERE DEP.Name IN ('Sales','Finance') AND E.[HireDate] > '1-1-1999'
+ORDER BY E.[HireDate] 
