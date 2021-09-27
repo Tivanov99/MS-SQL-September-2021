@@ -1,0 +1,8 @@
+SELECT TOP(50)RESULT.[FirstName],RESULT.[LastName],T.[Name],RESULT.[AddressText] FROM 
+(
+SELECT E.[FirstName],E.[LastName],A.[AddressText],A.[TownID]
+FROM [Employees] AS E
+JOIN [Addresses] AS A ON E.[AddressID]=A.[AddressID]
+) AS RESULT
+JOIN [Towns] AS T ON RESULT.[TownID]=T.TownID
+ORDER BY RESULT.[FirstName],RESULT.[LastName]
