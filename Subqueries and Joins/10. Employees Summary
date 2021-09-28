@@ -1,0 +1,8 @@
+SELECT TOP(50) RESULT.[EmployeeID], CONCAT(RESULT.[FirstName] , ' ' ,RESULT.[LastName]) AS [EmployeeName], CONCAT(EMP.[FirstName], ' ', EMP.[LastName]) AS [ManagerName],DEP.[Name]
+FROM
+(
+SELECT E.[EmployeeID],E.[FirstName],E.[ManagerID],E.[DepartmentID], E.[LastName]
+FROM [Employees] AS E
+) AS RESULT, [Employees] AS EMP, [Departments] AS DEP
+WHERE RESULT.ManagerID = EMP.EmployeeID AND RESULT.[DepartmentID] = DEP.[DepartmentID]
+ORDER BY RESULT.[EmployeeID]
