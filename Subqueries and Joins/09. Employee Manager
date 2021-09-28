@@ -1,0 +1,9 @@
+SELECT RESULT.[EmployeeID],RESULT.[FirstName],RESULT.[ManagerID], EMP.[FirstName] AS [ManagerName]
+FROM
+(
+SELECT E.[EmployeeID],E.[FirstName],E.[ManagerID]
+FROM [Employees] AS E
+WHERE E.[ManagerID] IN (3,7)
+) AS RESULT, [Employees] AS EMP
+WHERE RESULT.ManagerID = EMP.EmployeeID
+ORDER BY RESULT.[EmployeeID]
