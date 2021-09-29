@@ -1,0 +1,4 @@
+SELECT TOP(1) AVG(E.[Salary]) AS [MinAverageSalary] 
+FROM [Employees] AS E
+GROUP BY (e.DepartmentID)
+ORDER BY [MinAverageSalary] 
