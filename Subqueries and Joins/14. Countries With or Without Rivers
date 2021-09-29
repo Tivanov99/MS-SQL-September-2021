@@ -1,0 +1,10 @@
+SELECT TOP(5) C.[CountryName] ,
+CASE
+WHEN CR.[RiverId] IS NOT NULL THEN (SELECT [RiverName] FROM [Rivers] WHERE CR.[RiverId] = [Id] ) 
+END AS [RiverName]
+FROM
+[Countries] AS C
+LEFT JOIN [CountriesRivers] AS CR ON C.[CountryCode] = CR.[CountryCode]
+ --JOIN [Rivers] AS R ON CR.[RiverId] = R.[Id]
+WHERE C.[ContinentCode] IN ('AF', '%') 
+ORDER BY C.[CountryName]
