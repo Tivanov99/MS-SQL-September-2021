@@ -1,0 +1,3 @@
+SELECT MC.[CountryCode], COUNT(MC.[CountryCode]) FROM [MountainsCountries] AS MC
+WHERE MC.[CountryCode] IN ('US','RU','BG')
+GROUP BY (MC.[CountryCode])
