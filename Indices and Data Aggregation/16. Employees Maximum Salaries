@@ -1,0 +1,4 @@
+SELECT E.DepartmentID, MAX(E.[Salary]) AS [MaxSalary]
+FROM [Employees] AS E
+WHERE E.[Salary] <30000 or E.[Salary]>70000
+GROUP BY E.[DepartmentID]
