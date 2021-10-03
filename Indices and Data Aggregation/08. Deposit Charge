@@ -1,0 +1,3 @@
+SELECT WD.[DepositGroup], WD.[MagicWandCreator], MIN(WD.[DepositCharge])
+FROM [WizzardDeposits] as WD
+GROUP BY WD.[DepositGroup], WD.[MagicWandCreator]
