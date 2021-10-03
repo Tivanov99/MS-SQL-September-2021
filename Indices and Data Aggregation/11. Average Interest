@@ -1,0 +1,5 @@
+SELECT WD.[DepositGroup],WD.[IsDepositExpired] AS [IsDepositExpired], AVG(WD.[DepositInterest]) AS [AverageInterest]
+FROM [WizzardDeposits] AS WD
+WHERE WD.[DepositStartDate] >'1985-01-01' 
+GROUP BY WD.[DepositGroup],WD.[IsDepositExpired]
+ORDER BY  WD.[DepositGroup] DESC,WD.[IsDepositExpired]
