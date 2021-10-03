@@ -1,0 +1,8 @@
+SELECT TOP(10)[FirstName], [LastName],[DepartmentID] FROM
+(
+	SELECT AVG(E.[Salary]) AS [Avg Salary], E.[DepartmentID] AS [DepID]
+	FROM [Employees] AS E
+	GROUP BY E.[DepartmentID]
+) AS [AVG Salary]
+JOIN [Employees] AS EE ON EE.DepartmentID = [Avg Salary].[DepID] AND EE.[Salary]>[Avg Salary].[Avg Salary]
+ORDER BY [DepartmentID]
