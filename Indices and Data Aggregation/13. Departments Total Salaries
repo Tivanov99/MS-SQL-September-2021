@@ -1,0 +1,4 @@
+SELECT E.[DepartmentID], SUM(E.[Salary])
+FROM [Employees] AS [E]
+GROUP BY E.[DepartmentID]
+ORDER BY E.[DepartmentID]
