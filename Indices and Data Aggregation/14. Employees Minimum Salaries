@@ -1,0 +1,4 @@
+SELECT E.[DepartmentID], MIN(E.[Salary]) AS [MinimumSalary]
+FROM [Employees] AS E
+WHERE E.[DepartmentID] IN (2,5,7) AND E.[HireDate]>'2000-01-01'
+GROUP BY E.[DepartmentID]
