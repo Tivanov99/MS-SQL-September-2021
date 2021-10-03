@@ -1,0 +1,16 @@
+SELECT DISTINCT [DepartmentID],[ThirdHighestSalary]
+FROM
+(
+	SELECT  [DepartmentID],[Salary] AS [ThirdHighestSalary],[DA],[COUNT of emp] FROM
+(
+		SELECT DENSE_RANK() OVER (PARTITION BY [DepartmentID] ORDER BY E.[Salary] DESC) AS 'DA',E.[DepartmentID], e.[Salary]  FROM
+		[Employees] AS E
+) AS R
+RIGHT JOIN 
+(
+		SELECT DepartmentID AS DEPID, COUNT(EmployeeID) AS [COUNT of emp]
+		FROM [Employees] 
+		GROUP BY DepartmentID
+) AS [emp] ON [emp].DEPID=[DepartmentID]
+WHERE [DA]  =3 AND [COUNT of emp]>=3
+) AS [Result]
