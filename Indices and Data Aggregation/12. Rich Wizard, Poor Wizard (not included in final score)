@@ -1,0 +1,8 @@
+SELECT SUM(R.[Host Wizard Deposit]-R.[Guest Wizard Deposit]) AS [SumDifference]
+FROM
+(
+	SELECT WD.[FirstName] AS [Host Wizard], WD.[DepositAmount] AS [Host Wizard Deposit],
+	WD2.[FirstName] AS [Guest Wizard], WD2.[DepositAmount] AS [Guest Wizard Deposit]
+	FROM [WizzardDeposits] AS WD
+	JOIN [WizzardDeposits]  AS WD2 ON WD.[Id]+1 = WD2.[Id] 
+) AS R
