@@ -1,0 +1,12 @@
+SELECT CONCAT (E.[FirstName], ' ',E.[LastName]) AS FullName,
+CASE 
+WHEN  [UsersCount] IS NULL THEN 0 ELSE [UsersCount] 
+END [UsersCount]
+FROM
+(
+	SELECT R.[EmployeeId], COUNT(R.[UserId]) [UsersCount]
+	FROM [Reports] AS R
+	GROUP BY [EmployeeId]
+) AS T 
+RIGHT JOIN [Employees] AS E ON E.Id = T.EmployeeId
+ORDER BY [UsersCount] DESC, [FullName] ASC
