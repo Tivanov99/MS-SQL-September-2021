@@ -1,0 +1,7 @@
+CREATE OR ALTER FUNCTION [ufn_CalculateFutureValue] (@sum DECIMAL,@yir FLOAT, @years INT)
+RETURNS DECIMAL (10,4)
+AS 
+BEGIN
+DECLARE @res DECIMAL (10,4) = @sum * (POWER ((1+@yir),@years))
+RETURN  @res
+END
