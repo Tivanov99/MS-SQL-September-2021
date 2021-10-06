@@ -1,0 +1,7 @@
+CREATE PROCEDURE [usp_GetEmployeesFromTown] (@TownName VARCHAR(15))
+AS	
+	SELECT E.[FirstName],E.[LastName]
+	FROM [Employees] AS E
+	LEFT JOIN [Addresses] AS A ON A.AddressID=E.AddressID
+	LEFT JOIN [Towns] AS T ON A.TownID=T.TownID
+	WHERE SUBSTRING(T.[Name],1,LEN(@TownName)) = @TownName
