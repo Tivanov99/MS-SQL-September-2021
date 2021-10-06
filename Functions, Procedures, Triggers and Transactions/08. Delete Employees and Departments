@@ -1,0 +1,28 @@
+CREATE PROCEDURE [usp_DeleteEmployeesFromDepartment] (@departmentId INT)
+AS
+
+ALTER TABLE [EmployeesProjects]
+DROP CONSTRAINT [FK_EmployeesProjects_Employees]
+
+ALTER TABLE [Departments]
+DROP CONSTRAINT [FK_Departments_Employees]
+
+ALTER TABLE [Employees]
+DROP CONSTRAINT [FK_Employees_Employees]
+
+ALTER TABLE [Employees]
+ALTER COLUMN [ManagerID] INT NULL
+
+
+ALTER TABLE [Departments]
+ALTER COLUMN [ManagerID] INT NULL
+
+DELETE FROM [Employees]
+WHERE [DepartmentID]=7
+UPDATE [Departments]
+SET [ManagerID] = NULL
+WHERE [DepartmentID]=@departmentId
+DELETE FROM [Departments]
+WHERE [DepartmentID]=@departmentId
+SELECT COUNT(*) FROM [Employees]
+WHERE [DepartmentID]=@departmentId
