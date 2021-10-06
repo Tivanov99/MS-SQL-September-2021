@@ -1,0 +1,11 @@
+CREATE OR ALTER PROCEDURE [usp_GetHoldersWithBalanceHigherThan] (@MinMoney MONEY)
+AS 
+SELECT AH.[FirstName], AH.[LastName] FROM
+(
+SELECT A.[AccountHolderId],SUM(A.[Balance]) AS [TOTAL] 
+FROM [Accounts] AS A
+GROUP BY A.[AccountHolderId]
+) AS [R]
+JOIN [AccountHolders] AS AH ON R.AccountHolderId = AH.Id
+WHERE R.[TOTAL]>@MinMoney
+ORDER BY AH.[FirstName],AH.[LastName]
