@@ -5,3 +5,5 @@ AS
 	LEFT JOIN [Addresses] AS A ON A.AddressID=E.AddressID
 	LEFT JOIN [Towns] AS T ON A.TownID=T.TownID
 	WHERE SUBSTRING(T.[Name],1,LEN(@TownName)) = @TownName
+	
+EXEC dbo.usp_GetEmployeesFromTown Sofia
