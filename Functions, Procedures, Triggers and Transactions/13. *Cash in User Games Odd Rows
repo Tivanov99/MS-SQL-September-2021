@@ -1,0 +1,15 @@
+CREATE  FUNCTION [ufn_CashInUsersGames] (@GameName VARCHAR(50))
+RETURNS DECIMAL(10,2)
+AS
+BEGIN
+RETURN (
+		SELECT SUM(R.[Cash]) AS [SumCash] FROM
+		(
+			SELECT G.[Id], ROW_NUMBER() OVER (ORDER BY UG.[Cash] DESC) AS [Row], UG.[Cash]
+				FROM [Games] AS G
+				JOIN [UsersGames] AS UG ON UG.[GameId] = G.[Id]
+				WHERE G.[Name]=@GameName
+		) AS R
+		WHERE R.[Row] % 2 !=0
+		) 
+END
