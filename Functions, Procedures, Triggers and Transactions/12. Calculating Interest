@@ -1,0 +1,16 @@
+CREATE OR ALTER FUNCTION [ufn_CalculateFutureValue] (@I DECIMAL, @R FLOAT ,@T INT)
+RETURNS DECIMAL(10,4)
+AS
+BEGIN
+	DECLARE @result DECIMAL(10,4)= @I*(POWER((1+@R),@T))
+	RETURN @result
+END
+
+CREATE OR ALTER PROCEDURE [usp_CalculateFutureValueForAccount] (@AccountID INT,@ItRate FLOAT)
+AS
+SELECT AH.[Id] AS [Account Id], AH.[FirstName], AH.[LastName],A.[Balance], dbo.[ufn_CalculateFutureValue] (A.[Balance],@ItRate,5) AS [Balance in 5 years]
+FROM [AccountHolders] AS AH
+JOIN [Accounts] AS A ON A.Id=@AccountID
+WHERE AH.Id=@AccountID
+
+EXEC dbo.[usp_CalculateFutureValueForAccount] 1,0.1
