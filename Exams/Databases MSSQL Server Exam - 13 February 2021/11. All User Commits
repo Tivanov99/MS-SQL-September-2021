@@ -1,0 +1,11 @@
+CREATE FUNCTION [udf_AllUserCommits] (@username VARCHAR(50))
+RETURNS INT
+AS
+BEGIN
+
+DECLARE @USERID INT = (SELECT [Id] FROM [Users]
+				  WHERE [Username] = @username)
+
+DECLARE @RESULT INT = (SELECT COUNT(ContributorId) FROM [Commits] WHERE ContributorId = @USERID)
+RETURN @RESULT
+END
