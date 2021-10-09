@@ -1,0 +1,4 @@
+CREATE PROCEDURE [usp_SearchForFiles] (@fileExtension VARCHAR(10))
+AS
+	SELECT [Id],[Name],CONCAT([Size],'KB') AS [Size] FROM [Files] WHERE CHARINDEX(@fileExtension, [Name]) >0
+	ORDER BY [Id],[Name],[Size] DESC
