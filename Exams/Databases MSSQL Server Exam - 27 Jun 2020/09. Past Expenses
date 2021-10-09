@@ -1,0 +1,10 @@
+SELECT O.[JobId], SUM(P.[Price]) AS [Total]
+	FROM [OrderParts] AS [OP]
+		JOIN [Orders] AS O ON O.[OrderId] = OP.[OrderId] AND O.[JobId] IN
+		(
+			SELECT [JobId] FROM [Jobs]
+			WHERE [Status] ='Finished'
+		)
+	JOIN [Parts] AS P ON OP.[PartId] = P.[PartId]
+GROUP BY O.[JobId]
+ORDER BY [Total] DESC, O.[JobId] asc
