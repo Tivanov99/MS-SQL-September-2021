@@ -1,0 +1,3 @@
+SELECT [Id],[Name], CONCAT(Size,'KB') AS [Size] FROM [Files] as [F]
+WHERE (SELECT count(*) FROM[Files] WHERE [ParentId]=F.[Id]) =0
+ORDER BY Id, [Name], [Size] DESC
