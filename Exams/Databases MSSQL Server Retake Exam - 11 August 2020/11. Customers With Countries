@@ -1,0 +1,5 @@
+CREATE VIEW [v_UserWithCountries] AS 
+SELECT  CONCAT([Cus].[FirstName], ' ',Cus.[LastName]) AS [CustomerName], Cus.[Age],Cus.[Gender], [Coun].[Name]
+FROM [Customers] as [Cus]
+JOIN [Countries] AS [Coun] ON [Cus].CountryId= [Coun].[Id]
+ORDER BY [Cus].[Age]
