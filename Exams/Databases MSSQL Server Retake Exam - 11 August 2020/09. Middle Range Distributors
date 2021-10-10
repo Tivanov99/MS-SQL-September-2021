@@ -1,0 +1,14 @@
+SELECT D.[Name] AS [DistributorName], [I].[Name] AS [IngredientName], Res.[ProductName], Res.[Avg Rate]  FROM
+(
+	SELECT P.[Name] AS [ProductName], R.[Avg Rate], P.[Id] FROM
+	(
+		SELECT AVG([Rate]) AS [Avg Rate], [ProductId] FROM [Feedbacks]
+		GROUP BY [ProductId]
+	) AS [R]
+	JOIN [Products] AS P ON P.[Id]= R.[ProductId]
+	WHERE R.[Avg Rate] BETWEEN 5 AND 8
+) AS [Res]
+JOIN [ProductsIngredients] AS [PI] ON [PI].ProductId = [Res].Id
+JOIN [Ingredients] AS [I] ON [PI].IngredientId=[I].Id
+JOIN [Distributors] AS D ON [I].[DistributorId]= D.[Id]
+ORDER BY D.[Name],[I].[Name],[Res].[ProductName]
