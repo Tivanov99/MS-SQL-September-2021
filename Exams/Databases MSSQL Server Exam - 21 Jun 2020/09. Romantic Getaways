@@ -1,0 +1,14 @@
+SELECT [AC].[Id], AC.[Email], C.[Name], [Trips]  FROM
+(
+	SELECT  COUNT([AT].[AccountId]) AS [Trips],[AT].[AccountId]
+	FROM [AccountsTrips] AS [AT]
+	JOIN [Trips] AS [T] ON T.[Id] = [AT].[TripId]
+	JOIN [Rooms] AS [R] ON R.[Id] = T.[RoomId]
+	JOIN [Hotels] AS [H] ON R.[HotelId] = H.[Id]
+	JOIN [Accounts] AS [A] ON A.[Id]=[AT].[AccountId]
+	WHERE A.[CityId] = H.CityId
+	GROUP BY [AT].[AccountId]
+) AS [R]
+JOIN [Accounts] AS [AC] ON R.[AccountId] = AC.[Id]
+JOIN [Cities] AS C ON C.[Id] = AC.[CityId]
+ORDER BY [Trips] DESC ,[AC].[Id] ASC
