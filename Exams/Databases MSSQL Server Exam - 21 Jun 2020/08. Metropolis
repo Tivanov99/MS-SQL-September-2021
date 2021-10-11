@@ -1,0 +1,4 @@
+SELECT TOP(10) [Id],C.[Name],C.[CountryCode] AS [Country],[Count] FROM [Cities] AS C
+JOIN (SELECT [CityId],COUNT(*) AS [Count] FROM [Accounts]
+GROUP BY [CityId]) AS [Res] ON c.Id= [Res].[CityId]
+ORDER BY [Count] DESC
