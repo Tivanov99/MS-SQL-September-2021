@@ -1,0 +1,27 @@
+SELECT A.[Id] AS [AccountId],CONCAT(A.[FirstName], ' ',A.[LastName]) AS [FullName] , [LongestTrip],[ShortestTrip]  FROM 
+(
+	SELECT Shortest.[AccountId] , [Longest].[LongestTrip], [Shortest].[ShortestTrip] FROM
+	(
+		SELECT R.[AccountId], MIN([DIFF]) AS [ShortestTrip] FROM
+		(
+			SELECT * , DATEDIFF( DAY ,ArrivalDate,ReturnDate) AS [DIFF]
+			FROM [AccountsTrips] AS [AT]
+			LEFT JOIN [Trips] AS T ON T.[Id] = [AT].[TripId]
+			WHERE [T].[CancelDate] IS NULL
+			--ORDER BY [AccountId]
+		) AS [R]
+		GROUP BY R.[AccountId]
+	) AS [Shortest]
+	JOIN (SELECT R.[AccountId], MAX([DIFF]) AS [LongestTrip] FROM
+		(
+			SELECT * , DATEDIFF( DAY ,ArrivalDate,ReturnDate) AS [DIFF]
+			FROM [AccountsTrips] AS [AT]
+			LEFT JOIN [Trips] AS T ON T.[Id] = [AT].[TripId]
+			WHERE [T].[CancelDate] IS NULL
+			--ORDER BY [AccountId]
+		) AS [R]
+		GROUP BY R.[AccountId]) AS [Longest] ON [Shortest].[AccountId] = [Longest].[AccountId]
+) AS [Result]
+JOIN [Accounts] AS [A] ON A.[Id] = [Result].[AccountId]
+WHERE A.[MiddleName] IS NULL
+ORDER BY [LongestTrip] DESC ,[ShortestTrip]
