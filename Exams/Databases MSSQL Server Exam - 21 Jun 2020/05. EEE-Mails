@@ -1,0 +1,5 @@
+SELECT A.[FirstName],	A.[LastName]	,FORMAT(A.[BirthDate], 'MM-dd-yyyy')	, C.[Name] AS[Hometown],	A.[Email]
+FROM [Accounts] AS A
+JOIN [Cities] AS C ON A.[CityId] = C.[Id]
+WHERE [Email] LIKE 'e%'
+ORDER BY [Hometown]
