@@ -1,0 +1,8 @@
+SELECT C.[Name], [Hotels] FROM
+(
+SELECT [CityId], COUNT([Id]) AS [Hotels] FROM [Hotels]
+GROUP BY [CityId]
+) AS [R]
+JOIN [Cities] AS C ON [R].CityId = C.[Id]
+WHERE R.[Hotels] > 0
+ORDER BY [Hotels] DESC, C.[Name]
