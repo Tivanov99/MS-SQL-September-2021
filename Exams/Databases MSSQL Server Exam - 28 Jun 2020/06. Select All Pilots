@@ -1,0 +1,5 @@
+SELECT C.[Id], CONCAT(C.[FirstName],' ', C.[LastName]) AS [full_name] 
+FROM [Colonists] AS [C]
+JOIN [TravelCards] AS [T] ON T.[ColonistId] = C.[Id]
+WHERE T.[JobDuringJourney] = 'Pilot'
+ORDER BY c.[Id]
