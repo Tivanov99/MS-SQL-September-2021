@@ -1,0 +1,25 @@
+	CREATE  PROCEDURE [usp_AssignEmployeeToReport](@EmployeeId INT, @ReportId INT)
+	AS
+	
+	DECLARE @EmpId INT =
+	(
+		SELECT E.[DepartmentId]
+		FROM [Employees] AS E
+		WHERE E.[Id] = @EmployeeId
+	)
+
+	DECLARE @ReportCategory INT =
+	(
+		SELECT C.[DepartmentId] 
+		FROM [Reports] AS [R]
+		JOIN [Categories] AS C ON C.[Id]=R.[CategoryId]
+		WHERE R.[Id] = @ReportId
+	)
+	IF(@EmpId=@ReportCategory)
+	BEGIN
+		UPDATE [Reports]
+		SET [EmployeeId] = @EmployeeId
+		WHERE [Id] = @ReportId
+	END
+	ELSE
+	THROW 50000,'Employee doesn''t belong to the appropriate department!',1
