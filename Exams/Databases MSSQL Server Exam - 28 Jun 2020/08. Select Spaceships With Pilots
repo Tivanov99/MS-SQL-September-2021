@@ -1,0 +1,7 @@
+SELECT SS.[Name], SS.[Manufacturer]
+FROM [Colonists] AS C
+JOIN [TravelCards] AS T ON T.[ColonistId] = C.[Id] 
+JOIN [Journeys] AS J ON T.[JourneyId] = J.[Id]
+JOIN [Spaceships] AS SS ON J.[SpaceshipId] =SS.[Id]
+WHERE DATEDIFF(YEAR, C.[BirthDate] ,'01/01/2019') <30 AND T.[JobDuringJourney]='Pilot'
+ORDER BY SS.[Name]
