@@ -1,0 +1,6 @@
+SELECT P.[Name] AS [PlanetName], COUNT(J.[Id]) AS [JourneysCount]
+FROM [Journeys] AS J
+JOIN [Spaceports] AS SP ON J.[DestinationSpaceportId] = SP.[Id]
+JOIN [Planets] AS P ON P.[Id] = SP.[PlanetId]
+GROUP BY P.[Name]
+ORDER BY [JourneysCount] DESC, P.[Name]
