@@ -1,0 +1,14 @@
+CREATE  FUNCTION [udf_GetColonistsCount](@PlanetName VARCHAR (30)) 
+RETURNS INT
+AS
+BEGIN
+	DECLARE  @Result INT = (
+	SELECT COUNT(*) AS [Count]
+	FROM [Colonists] AS C
+	JOIN [TravelCards] AS T ON C.[Id]=T.[ColonistId]
+	JOIN[Journeys] AS J ON J.[Id]=T.[JourneyId]
+	JOIN [Spaceports] AS SP ON SP.[Id]= J.[DestinationSpaceportId]
+	JOIN [Planets] AS P ON SP.[PlanetId]=P.[Id]
+	WHERE p.[Name] =@PlanetName)
+	RETURN @Result
+END
