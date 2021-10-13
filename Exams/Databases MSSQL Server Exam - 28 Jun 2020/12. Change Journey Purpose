@@ -1,0 +1,14 @@
+CREATE PROCEDURE [usp_ChangeJourneyPurpose](@JourneyId INT, @NewPurpose VARCHAR(11))
+AS
+	DECLARE @IsExist INT = (SELECT COUNT([Id]) AS [C] FROM [Journeys] WHERE [Id] = @JourneyId)
+	DECLARE @IsTheSamePurpose INT= (SELECT COUNT([Id]) FROM [Journeys] AS J WHERE J.[Purpose] = @NewPurpose AND J.[Id] = @JourneyId)
+	IF(@IsExist=0)
+		THROW 50000,'The journey does not exist!'  ,1;
+	ELSE IF(@IsTheSamePurpose=0)
+		THROW 50000,'You cannot change the purpose!',1 ;  
+	ELSE
+		UPDATE [Journeys]
+		SET [Purpose] = @NewPurpose
+		WHERE [Id] = @JourneyId AND [Purpose] = @NewPurpose
+	
+EXEC usp_ChangeJourneyPurpose 4, 'Technical'
