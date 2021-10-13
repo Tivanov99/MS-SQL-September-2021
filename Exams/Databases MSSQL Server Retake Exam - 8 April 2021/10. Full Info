@@ -1,0 +1,21 @@
+SELECT 
+CASE
+WHEN CONCAT(E.[FirstName], ' ', E.[LastName]) = '' THEN 'None' ELSE
+CONCAT(E.[FirstName], ' ', E.[LastName]) 
+END [Employee],
+CASE 
+WHEN D.[Name] IS NULL THEN 'None' ELSE D.[Name]
+END [Department],
+C.[Name] AS[Category],
+R.[Description],
+FORMAT(R.[OpenDate], 'dd.MM.yyyy')	AS [OpenDate],
+S.[Label] AS [Status],
+U.[Name] AS [User]
+FROM [Reports] AS R
+LEFT JOIN [Employees] AS E ON R.[EmployeeId] = E.[Id]
+LEFT JOIN [Departments] AS [D] ON D.[Id] = E.[DepartmentId]
+LEFT JOIN [Categories] AS [C] ON C.[Id] =R.[CategoryId]
+LEFT JOIN [Status] AS [S] ON S.[Id] = R.[StatusId]
+LEFT JOIN [Users] AS U ON U.[Id] = R.[UserId]
+ORDER BY e.[FirstName] DESC, E.[LastName] DESC, D.[Name] , C.[Name], R.[Description], R.[OpenDate],
+S.[Label] , U.[Name]
