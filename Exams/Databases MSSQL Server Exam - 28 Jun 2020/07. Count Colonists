@@ -1,0 +1,9 @@
+SELECT COUNT(*) AS [count]
+FROM 
+(
+	SELECT c.[Id] 
+	FROM [Colonists] AS [C]
+	JOIN [TravelCards] AS T
+	ON C.[Id]= T.[ColonistId]
+	WHERE T.[JourneyId] IN (SELECT [Id] FROM [Journeys] WHERE [Purpose] ='Technical')
+) AS [R]
