@@ -1,0 +1,15 @@
+SELECT P.[Name], P.[Seats],
+CASE 
+WHEN [R].[Passengers Count] IS NULL THEN 0 ELSE [R].[Passengers Count]
+END [Passengers Count]
+	FROM(
+		SELECT F.[PlaneId], COUNT(T.[PassengerId]) AS [Passengers Count]
+		FROM [Tickets] AS [T]
+		 JOIN [Flights] AS F ON F.[Id]=T.[FlightId]
+		GROUP BY F.[PlaneId]
+		) AS [R]
+	RIGHT JOIN [Planes] AS P ON P.[Id]=[R].[PlaneId]
+	ORDER BY R.[Passengers Count] DESC, P.[Name]ASC, P.[Seats] ASC
+
+
+
