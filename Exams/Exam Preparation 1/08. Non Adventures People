@@ -1,0 +1,6 @@
+SELECT [FirstName], [LastName], [Age] FROM [Passengers]
+WHERE [Id] NOT IN (
+					SELECT [PassengerId] FROM [Tickets]
+					GROUP BY [PassengerId]
+					)
+ORDER BY [Age] DESC,[FirstName],[LastName]
