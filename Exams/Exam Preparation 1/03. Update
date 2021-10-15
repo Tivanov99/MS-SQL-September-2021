@@ -1,0 +1,8 @@
+UPDATE [Tickets]
+SET [Price] += [Price]*0.13
+WHERE [FlightId] IN (
+						SELECT T.[FlightId] 
+						FROM [Tickets] AS T
+						JOIN [Flights] AS F ON T.[FlightId] = F.[Id]
+						WHERE F.[Destination]='Carlsbad'
+					 )
