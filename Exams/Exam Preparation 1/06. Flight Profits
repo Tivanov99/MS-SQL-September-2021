@@ -1,0 +1,6 @@
+
+SELECT F.[Id], SUM(T.[Price]) AS [Price]
+FROM [Tickets] AS T
+JOIN [Flights] AS F ON T.[FlightId] = F.[Id]
+GROUP BY F.[Id]
+ORDER BY [Price] DESC, F.[Id]ASC
