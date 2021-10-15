@@ -1,0 +1,11 @@
+DELETE FROM [Tickets]
+WHERE [Id] IN
+				(
+				SELECT T.[Id]
+				FROM [Tickets] AS T
+				JOIN [Flights] AS F ON T.[FlightId]=F.[Id]
+				WHERE F.[Destination]='Ayn Halagim'
+				)
+
+DELETE FROM [Flights]
+WHERE [Destination]='Ayn Halagim'
