@@ -1,0 +1,12 @@
+UPDATE [Cigars]
+SET [PriceForSingleCigar] += [PriceForSingleCigar]*0.20
+WHERE [Id] IN (
+				SELECT C.[Id]
+				FROM [Cigars] AS C
+				JOIN [Tastes] AS T ON C.[TastId] = T.[Id]
+				--JOIN [Brands] AS B ON B.[Id] = C.[BrandId]
+				WHERE T.[TasteType] ='Spicy'
+				)
+UPDATE [Brands]
+SET [BrandDescription] = 'New description'
+WHERE [BrandDescription] IS NULL 
