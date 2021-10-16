@@ -1,0 +1,14 @@
+SELECT CONCAT(Cli.FirstName, ' ', Cli.LastName) AS [FullName],A.[Country], A.[ZIP] ,CONCAT('$',[CigarPrice] ) AS [CigarPrice]  FROM
+(
+	SELECT C.[Id] , MAX(CIG.[PriceForSingleCigar]) AS [CigarPrice]
+	FROM [Clients] AS C
+	JOIN [Addresses] AS A ON C.[AddressId]=A.[Id]
+	JOIN [ClientsCigars] AS CC ON C.[Id]=CC.[ClientId]
+	JOIN [Cigars] AS [Cig] ON CC.CigarId=Cig.[Id]
+	WHERE A.[ZIP] NOT LIKE '%[^0-9]%'
+	GROUP BY  C.[Id]
+) AS [Res]
+JOIN [Clients] AS [Cli] ON [Res].Id= Cli.Id
+JOIN [Addresses] AS A ON Cli.[AddressId]=A.[Id]
+ORDER BY [FullName]
+
